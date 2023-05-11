@@ -45,5 +45,5 @@ echo -e "${GREEN}Done.${NC}"
 # Change default route
 echo -e "${GREEN}Switching default route to non-VPN connection...${NC}"
 sudo ip route del default dev ppp0
-sudo ip route add default via "${MY_GATEWAY}" dev "${MY_INET_IFACE}"
+sudo ip route add default via "${MY_GATEWAY}" dev "${MY_INET_IFACE}" >/dev/null 2>&1
 echo -e "${GREEN}Done.${NC}"
