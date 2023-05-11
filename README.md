@@ -1,6 +1,10 @@
 # talk-gpt-talk
 Split traffic tunneling to get access to both work resources and restricted sites
 
+## Disclaimer
+1) For now you should be located OUTSIDE OF RUSSIA to use this script successfully!
+2) Works with openfortivpn
+
 ## Setup
 
     git clone https://github.com/nickzherdev/talk-gpt-talk.git
@@ -42,3 +46,8 @@ Execute script:
 To check the route table, execute:
 
     ip r
+
+## Future work
+
+1) Connect from RUSSIA (remote): add tunneling to another VPN so traffic to openai goes through it
+2) Connect from RUSSIA (office): check network setup
