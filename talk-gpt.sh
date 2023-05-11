@@ -19,7 +19,7 @@ if [ "$current_default" == "$MY_INET_IFACE" ]; then
 fi
 
 # remove any old rules for these domains
-echo -e "${RED}Removing old rules...${NC}"
+echo -e "${GREEN}Removing old rules...${NC}"
 for domain in "${domains[@]}"; do
     for ip in $(ip route show | grep -oP '(\d{1,3}\.){3}\d{1,3}(?= dev ppp0)'); do
         sudo ip route del $ip dev ppp0
@@ -28,23 +28,22 @@ done
 echo -e "${GREEN}Done.${NC}"
 
 # add a route to connect to VATS through the VPN
-echo -e "${RED}Adding route for VATS...${NC}"
-sudo ip route add "${VATS_DOMAIN}" dev ppp0
+echo -e "${GREEN}Adding route for VATS...${NC}"
+sudo ip route add "${VATS_DOMAIN}" dev ppp0 >/dev/null 2>&1
+echo -e "${GREEN}Done.${NC}"
 
 # resolve current IP addresses for these domains
-echo -e "${RED}Adding new rules...${NC}"
-count=0
+echo -e "${GREEN}Adding new rules...${NC}"
 for domain in "${domains[@]}"; do
-    echo -ne "${GREEN}Processing $domain ... (${count}/${total}) ${NC}\r"
+    echo "Processing $domain ..."
     for ip in $(getent ahostsv4 $domain | awk '{ print $1 }' | sort -u); do
         sudo ip route add $ip dev ppp0 >/dev/null 2>&1
     done
-    ((count++))
 done
-echo -e "${GREEN}Done. (${total}/${total})${NC}"
+echo -e "${GREEN}Done.${NC}"
 
 # Change default route
-echo -e "${RED}Switching default route to non-VPN connection...${NC}"
+echo -e "${GREEN}Switching default route to non-VPN connection...${NC}"
 sudo ip route del default dev ppp0
 sudo ip route add default via "${MY_GATEWAY}" dev "${MY_INET_IFACE}"
 echo -e "${GREEN}Done.${NC}"
