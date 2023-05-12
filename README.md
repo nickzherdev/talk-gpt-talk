@@ -13,7 +13,7 @@ Add environment variables to ~/.zshrc (example)
 
     export MY_GATEWAY="192.168.2.1"
     export MY_INET_IFACE="wlp0s20f3"
-    export MY_VPN_DOMAINS="mx.evocargo.com wiki.evocargo.org jira.evocargo.org git.evocargo.org id.evocargo.org sso.evocargo.site cloud.evocargo.org"
+    export MY_VPN_DOMAINS="mx.evocargo.com wiki.evocargo.org jira.evocargo.org git.evocargo.org git.evocargo.com id.evocargo.org sso.evocargo.site cloud.evocargo.org"
     export VATS_DOMAIN="172.25.192.0/24"
 
 Save and exit. Source ~/.zshrc
@@ -46,6 +46,11 @@ Execute script:
 To check the route table, execute:
 
     ip r
+
+## Troubleshooting
+
+Some resources are not available? Just append them to MY_VPN_DOMAINS in ~/.zshrc.
+Still not working? Restart VPN service, it will reset the changes made by this script.  
 
 ## Future work
 
