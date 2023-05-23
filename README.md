@@ -24,7 +24,7 @@ Add symlink to /usr/local/bin for convinient calling
 
     sudo ln -s <full_path>/talk-gpt-talk/talk-gpt.sh /usr/local/bin/talk-gpt.sh
 
-Ad permission to execute
+Add permission to execute
 
     sudo chmod +x /usr/local/bin/talk-gpt.sh
     sudo chmod +x <full_path>/talk-gpt-talk/talk-gpt.sh
@@ -36,7 +36,7 @@ Ad permission to execute
 (optional) To prevent entering a password each time, add an exeption to sudoers to the end of the file
 
     sudo visudo
-    YOUR_USER_NAME ALL=(ALL) NOPASSWD: /usr/local/bin/talk-gpt.sh
+    YOUR_USER_NAME ALL=(ALL) NOPASSWD: /usr/sbin/ip
 
 Connect to the VPN.
 Execute script:
@@ -46,6 +46,11 @@ Execute script:
 To check the route table, execute:
 
     ip r
+
+## Known problems
+
+1) After some time selected sites stop responding.  SOLUTION: add cron job to run this script perodically
+2) Connecting to VATS using devel@evo_n_nnn.evocargo.site is not supported. Please connect using IP adresses.
 
 ## Troubleshooting
 

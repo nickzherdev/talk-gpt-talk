@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if ! ip link show ppp0 &>/dev/null; then
+    echo "VPN is not active. Exiting."
+    exit 1
+fi
+
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
