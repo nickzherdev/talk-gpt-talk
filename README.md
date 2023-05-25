@@ -14,6 +14,7 @@ Add configs to config.cfg or use as is (see file).
 Add symlink to /usr/local/bin for convinient calling
 
     sudo ln -s <full_path>/talk-gpt-talk/talk-gpt.sh /usr/local/bin/talk-gpt.sh
+    sudo ln -s <full_path>/talk-gpt-talk/config.cfg /usr/local/bin/config.cfg
 
 Add permission to execute
 
