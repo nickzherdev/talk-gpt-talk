@@ -9,16 +9,7 @@ Split traffic tunneling to get access to both work resources and restricted site
 
     git clone https://github.com/nickzherdev/talk-gpt-talk.git
 
-Add environment variables to ~/.zshrc (example)
-
-    export MY_GATEWAY="192.168.2.1"
-    export MY_INET_IFACE="wlp0s20f3"
-    export MY_VPN_DOMAINS="mx.evocargo.com wiki.evocargo.org jira.evocargo.org git.evocargo.org git.evocargo.com id.evocargo.org sso.evocargo.site cloud.evocargo.org"
-    export VATS_DOMAIN="172.25.192.0/24"
-
-Save and exit. Source ~/.zshrc
-
-    source ~/.zshrc
+Add configs to config.cfg or use as is (see file).
 
 Add symlink to /usr/local/bin for convinient calling
 
@@ -47,17 +38,41 @@ To check the route table, execute:
 
     ip r
 
+The result should look similar to this:
+    default via 192.168.2.1 dev wlp0s20f3 
+    default via 192.168.2.1 dev wlp0s20f3 metric 5428 
+    10.0.238.10 dev ppp0 scope link 
+    10.0.238.25 dev ppp0 scope link 
+    10.0.239.4 dev ppp0 scope link 
+    10.0.239.35 dev ppp0 scope link 
+    ...
+    195.34.193.186 via 192.168.2.1 dev wlp0s20f3 
+
 ## Known problems
 
-1) After some time selected sites stop responding.  SOLUTION: add cron job to run this script perodically
-2) Connecting to VATS using devel@evo_n_nnn.evocargo.site is not supported. Please connect using IP adresses.
+1) After some time selected sites stop responding.  
+
+[SOLVED]: add cron job to run this script perodically.
+
+    sudo vim /etc/crontab
+
+Add a line in the end. Don't forget to change ANY_AVAILABLE_NUMBER and YOUR_USERNAME.
+
+    ANY_AVAILABLE_NUMBER */1 * * * *   YOUR_USERNAME     /usr/local/bin/talk-gpt.sh >>/home/YOUR_USERNAME/cron_logs.txt 2>&1
+
+Reload servicce:
+    sudo service cron reload
+
+2) Connecting to VATS using devel@evo_n_nnn.evocargo.site is not supported. 
+Please connect using IP adresses.
 
 ## Troubleshooting
 
-Some resources are not available? Just append them to MY_VPN_DOMAINS in ~/.zshrc.
-Still not working? Restart VPN service, it will reset the changes made by this script.  
+Some resources are not available? Just append them to config.cfg
+Still not working? Restart VPN service, it will reset the changes made by this script.  You may want also to comment out a crob job.
 
 ## Future work
 
 1) Connect from RUSSIA (remote): add tunneling to another VPN so traffic to openai goes through it
+https://superuser.com/questions/709376/is-it-possible-to-have-2-different-vpn-connections-simultaneously-on-the-same-ma
 2) Connect from RUSSIA (office): check network setup

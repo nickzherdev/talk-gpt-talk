@@ -5,6 +5,14 @@ if ! ip link show ppp0 &>/dev/null; then
     exit 1
 fi
 
+# Get the directory of the current script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Source the config file
+source "$DIR/config.cfg"
+
+# Convert the space separated domains to an array
+IFS=' ' read -ra domains <<< "$MY_VPN_DOMAINS"
 
 # Colors for output
 RED='\033[0;31m'
