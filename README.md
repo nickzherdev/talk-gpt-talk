@@ -63,7 +63,8 @@ Add a line in the end. Don't forget to change ANY_AVAILABLE_NUMBER and YOUR_USER
 
 Reload servicce:
     sudo service cron reload
-
+    sudo service cron start
+    
 2) Connecting to VATS using devel@evo_n_nnn.evocargo.site is not supported. 
 Please connect using IP adresses.
 
